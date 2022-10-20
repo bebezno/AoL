@@ -1,3 +1,6 @@
+let now = new Date()
+document.getElementById('mapupdate').innerHTML = `${now.toLocaleString()} <p id="clock"></p>`;
+
 var inicialTime = 300; // actualiza cada 5 minutos
 var actualTime = inicialTime;
 
@@ -11,7 +14,7 @@ function Clock() {
         setTimeout("Clock()", 1000); // 1 seg
     }
     var minutos = Math.floor(actualTime/60) + 1;
-    document.getElementById('Clock').innerHTML = minutos
+    document.getElementById('clock').innerHTML = minutos
         + " min. para actualización";
 }
 
