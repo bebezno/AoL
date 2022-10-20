@@ -13,7 +13,12 @@ No existen dependencias de otras fuentes más allá de HTML5.
 
 ### Instalación 🔧
 
-Descargar y descomprimir.
+1. Descargar y descomprimir  
+2. Obtener API Key de [Opendata Aemet](https://opendata.aemet.es/centrodedescargas/inicio)  
+3. Sustituir API Key en [maps.js](js/maps.js)  
+    function loadAemet() {  
+      // Define API Key  
+	    var AK = ""  
 
 ## Demo ⚙️
 
@@ -31,8 +36,8 @@ Descargar y descomprimir.
 
 ## Fuentes
 
-* **TheRoam** - [leafMET]
-* **Rob Hawkes** - [Pixel Manipulation]
+* @TheRoam - [leafMET]
+* Rob Hawkes - [Pixel Manipulation]
 
 ## Licencia
 
