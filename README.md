@@ -7,7 +7,7 @@ AoL es una implementación del radar de la Aemet (Agencia Estatal de Meteorolog�
 
 Solo 28K.
 
-### Pre-requisitos 📋
+### Requisitos 📋
 
 Obtención de API Key en [Opendata Aemet](https://opendata.aemet.es/centrodedescargas/inicio).
 No existen dependencias de otras fuentes más allá de HTML5.
@@ -27,11 +27,11 @@ No existen dependencias de otras fuentes más allá de HTML5.
 
 <img src="https://user-images.githubusercontent.com/91427246/197034915-ce122497-bea6-48b2-9e65-2d8af3a73e91.png" width="635" height="430">
 
-## Construido con 🛠️
+## Desarrollado con 🛠️
 
 * [Visual Studio Code](https://code.visualstudio.com/)
 
-## Autores ✒️
+## Autor ✒️
 
 * **Juan José López Seoane** - [AoL]
 
