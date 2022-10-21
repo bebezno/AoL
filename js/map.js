@@ -70,8 +70,8 @@ var app = (function () {
 	// Public methods goes here...
 	public.loadPicture = function (imageUrl) {
 		var imageObj = new Image();
-		imageObj.src = imageUrl;
-		imageObj.crossOrigin = "Anonymous";
+		imageObj.src = imageUrl
+		imageObj.crossOrigin = "https://aol.orbisnonsufficit.es/"
 
 		imageObj.onload = function () {
 			context.drawImage(imageObj, 0, 0, canvas.width, canvas.height);
