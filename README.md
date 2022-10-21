@@ -1,4 +1,5 @@
-# AoL (Aemet over Leaflet)
+# AoL (Aemet over Leaflet) <img src="https://user-images.githubusercontent.com/91427246/197046316-dd3fac5c-ffb9-47cc-b8d8-ecb06f2d0e42.png" width="32" height="32">
+
 
 AoL es una implementación del radar de la Aemet (Agencia Estatal de Meteorología de España) sobre OpenStreeMaps usando la librería de código libre Leaflet.
 
@@ -6,14 +7,19 @@ AoL es una implementación del radar de la Aemet (Agencia Estatal de Meteorolog�
 
 Solo 28K.
 
-### Pre-requisitos 📋
+### Requisitos 📋
 
 Obtención de API Key en [Opendata Aemet](https://opendata.aemet.es/centrodedescargas/inicio).
 No existen dependencias de otras fuentes más allá de HTML5.
 
 ### Instalación 🔧
 
-Descargar y descomprimir.
+1. Descargar y descomprimir  
+2. Obtener API Key de [Opendata Aemet](https://opendata.aemet.es/centrodedescargas/inicio)  
+3. Sustituir API Key en [maps.js](js/maps.js)  
+    function loadAemet() {  
+      // Define API Key  
+	    var AK = ""  
 
 ## Demo ⚙️
 
@@ -21,18 +27,18 @@ Descargar y descomprimir.
 
 <img src="https://user-images.githubusercontent.com/91427246/197034915-ce122497-bea6-48b2-9e65-2d8af3a73e91.png" width="635" height="430">
 
-## Construido con 🛠️
+## Desarrollado con 🛠️
 
 * [Visual Studio Code](https://code.visualstudio.com/)
 
-## Autores ✒️
+## Autor ✒️
 
 * **Juan José López Seoane** - [AoL]
 
 ## Fuentes
 
-* **TheRoam** - [leafMET]
-* **Rob Hawkes** - [Pixel Manipulation]
+* @TheRoam - [leafMET]
+* Rob Hawkes - [Pixel Manipulation]
 
 ## Licencia
 
