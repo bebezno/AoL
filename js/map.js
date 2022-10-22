@@ -33,7 +33,7 @@ function loadMap(aemet) {
 
 function loadAemet() {
 	// API Key obtenida en Opendata Aemet
-	var AK = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqdWFuam8ubC5zZW9hbmVAZ21haWwuY29tIiwianRpIjoiZDE3M2QzZGYtNGUxMC00NDdkLThmNTYtMTBiMTc5YjNlY2U5IiwiaXNzIjoiQUVNRVQiLCJpYXQiOjE2NDk0MjI5NTYsInVzZXJJZCI6ImQxNzNkM2RmLTRlMTAtNDQ3ZC04ZjU2LTEwYjE3OWIzZWNlOSIsInJvbGUiOiIifQ.vf8BhVgGFF82flCWcoZ0tyP8yRQ7uXnGNC9k1Yc6ng0" 
+	var AK = ""
 	// Define URLs de OpenData Aemet
 	var URL1 = "https://opendata.aemet.es/opendata/api/red/radar/nacional"
 
@@ -70,7 +70,7 @@ var app = (function () {
 		var imageObj = new Image()
 		imageObj.src = imageUrl
 		// URL que va a originar la petición de datos
-		imageObj.crossOrigin = "https://aol.orbisnonsufficit.es/"
+		imageObj.crossOrigin = ""
 
 		imageObj.onload = function () {
 			context.drawImage(imageObj, 0, 0, canvas.width, canvas.height)
