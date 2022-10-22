@@ -22,7 +22,7 @@ No existen dependencias de otras fuentes más allá de HTML5.
 	    var AK = "" // API Key obtenida en Opendata Aemet
 
     * public.loadPicture = function (imageUrl) { ...
-      imageObj.crossOrigin = "" // por la URL que va a originar la petición de datos
+      imageObj.crossOrigin = "" // URL que va a originar la petición de datos
 
 ## Demo ⚙️
 
