@@ -6,11 +6,10 @@ let aemetIberia = [null]
 let aemetCanarias = null
 let urlIberia = 'https://opendata.aemet.es/opendata/api/red/radar/nacional'
 let urlCanarias = 'https://opendata.aemet.es/opendata/api/red/radar/regional/ca'
-// Marco donde se ubicará la imagen 760 * 760 px, límites [NORTE, OESTE, SUR, ESTE]
-let marcoIberia = [[46.4, -2.0],[41.0, -12.0],[32.9, 0.0],[40.42, 5.86]]
-// Marco donde se ubicará la imagen 480 * 530 px, límites [[NORTE, OESTE], [SUR, OESTE], [SUR, ESTE], [NORTE, ESTE]]
+// Marco donde se ubicará la imagen 760 * 760 px, límites [[NORTE, OESTE], [SUR, OESTE], [SUR, ESTE], [NORTE, ESTE]]
+let marcoIberia = [[46.4, -12.0],[32.9, -12.0],[32.9, 5.86],[46.4, 5.86]]
+// Marco donde se ubicará la imagen 480 * 530 px
 let marcoCanarias = [[30.0, -18.1],[25.2, -18.1],[25.2, -13.4],[30.0, -13.4]]
-
 
 loadAemet(0, urlIberia, marcoIberia)
 
@@ -23,7 +22,7 @@ function loadMap(aemet) {
 
 	// Centro en Madrid
 	map = L.map('map', {
-		center: [40.4381311, -3.8196201],
+		center: [40.4379543,-3.6795367],
 		zoom: 6,
 		layers: [tiles, aemet[0], aemet[1]]
 	})
