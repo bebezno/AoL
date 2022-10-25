@@ -19,13 +19,13 @@ No existen dependencias de otras fuentes más allá de HTML5.
 
 1. Descargar y descomprimir  
 2. Obtener API Key de [Opendata Aemet](https://opendata.aemet.es/centrodedescargas/inicio)  
-3. Sustituir en [maps.js](js/maps.js) API Key y crossOrigin
+3. Sustituir en [maps.js](https://github.com/bebezno/AoL/blob/master/js/map.js) API Key y crossOrigin
     
     * function loadAemet() {  ...
 	    var AK = "" // API Key obtenida en Opendata Aemet
 
     * public.loadPicture = function (imageUrl) { ...
-      imageObj.crossOrigin = "" // por la URL que va a originar la petición de datos
+      imageObj.crossOrigin = "" // URL que va a originar la petición de datos
 
 ## Demo ⚙️
 

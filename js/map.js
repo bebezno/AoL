@@ -81,7 +81,7 @@ var app = (function () {
 		var imageObj = new Image()
 		imageObj.src = imageUrl
 		// URL que va a originar la petición de datos
-		imageObj.crossOrigin = "https://aol.orbisnonsufficit.es/"
+		imageObj.crossOrigin = ""
 
 		imageObj.onload = function () {
 			context.drawImage(imageObj, 0, 0, canvas.width, canvas.height)
