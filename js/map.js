@@ -1,7 +1,18 @@
 
-let map = null
+// let map = null
+let marco = null
+let aemet = []
+let aemetIberia = [null]
+let aemetCanarias = null
+let urlIberia = 'https://opendata.aemet.es/opendata/api/red/radar/nacional'
+let urlCanarias = 'https://opendata.aemet.es/opendata/api/red/radar/regional/ca'
+// Marco donde se ubicará la imagen 760 * 760 px, límites [NORTE, OESTE, SUR, ESTE]
+let marcoIberia = [[46.4, -2.0],[41.0, -12.0],[32.9, 0.0],[40.42, 5.86]]
+// Marco donde se ubicará la imagen 480 * 530 px, límites [[NORTE, OESTE], [SUR, OESTE], [SUR, ESTE], [NORTE, ESTE]]
+let marcoCanarias = [[30.0, -18.1],[25.2, -18.1],[25.2, -13.4],[30.0, -13.4]]
 
-loadAemet()
+
+loadAemet(0, urlIberia, marcoIberia)
 
 function loadMap(aemet) {
 
@@ -10,12 +21,11 @@ function loadMap(aemet) {
 		attribution: '&copy <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 	})
 
-
 	// Centro en Madrid
 	map = L.map('map', {
 		center: [40.4381311, -3.8196201],
 		zoom: 6,
-		layers: [tiles, aemet]
+		layers: [tiles, aemet[0], aemet[1]]
 	})
 
 	// Mapas base, se pueden ampliar con otras fuentes
@@ -25,18 +35,16 @@ function loadMap(aemet) {
 
 	// Capa con la imagen de la Aemet
 	var overlayMaps = {
-		"Aemet": aemet,
+		"Iberia": aemet[0],
+		"Canarias": aemet[1],
 	}
 
 	L.control.layers(baseMaps, overlayMaps).addTo(map)
 }
 
-function loadAemet() {
+function loadAemet(index, url1, marco) {
 	// API Key obtenida en Opendata Aemet
-	var AK = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqdWFuam8ubC5zZW9hbmVAZ21haWwuY29tIiwianRpIjoiZDE3M2QzZGYtNGUxMC00NDdkLThmNTYtMTBiMTc5YjNlY2U5IiwiaXNzIjoiQUVNRVQiLCJpYXQiOjE2NDk0MjI5NTYsInVzZXJJZCI6ImQxNzNkM2RmLTRlMTAtNDQ3ZC04ZjU2LTEwYjE3OWIzZWNlOSIsInJvbGUiOiIifQ.vf8BhVgGFF82flCWcoZ0tyP8yRQ7uXnGNC9k1Yc6ng0" 
-	// Define URLs de OpenData Aemet
-	var URL1 = "https://opendata.aemet.es/opendata/api/red/radar/nacional"
-
+	var AK = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqdWFuam8ubC5zZW9hbmVAZ21haWwuY29tIiwianRpIjoiZDE3M2QzZGYtNGUxMC00NDdkLThmNTYtMTBiMTc5YjNlY2U5IiwiaXNzIjoiQUVNRVQiLCJpYXQiOjE2NDk0MjI5NTYsInVzZXJJZCI6ImQxNzNkM2RmLTRlMTAtNDQ3ZC04ZjU2LTEwYjE3OWIzZWNlOSIsInJvbGUiOiIifQ.vf8BhVgGFF82flCWcoZ0tyP8yRQ7uXnGNC9k1Yc6ng0"
 	var URL2 = ""
 
 	// XMLHttpRequest
@@ -49,24 +57,27 @@ function loadAemet() {
 		URL2 = JSON.parse(this.responseText)
 		// Obtiene el campo "datos"
 		var imageUrl = URL2.datos
-		app.loadPicture(imageUrl)
-
+		app.loadPicture(index, imageUrl, marco)
 	}
 
 	// Send Request
-	xhttp1.open("GET", URL1 + "/?api_key=" + AK)
+	xhttp1.open("GET", url1 + "/?api_key=" + AK)
 	xhttp1.send()
 }
 
 // Aemet app.loadPicture
 var app = (function () {
+	let index = null
+	let marco = null
 	var canvas = document.getElementById('canvas'),
-		context = canvas.getContext('2d'),
+		context = canvas.getContext('2d', { willReadFrequently: true }),
 
 		// API
 		public = {}
 
-	public.loadPicture = function (imageUrl) {
+	public.loadPicture = function (indexlocal, imageUrl, marcoLocal) {
+		marco = marcoLocal
+		index = indexlocal
 		var imageObj = new Image()
 		imageObj.src = imageUrl
 		// URL que va a originar la petición de datos
@@ -91,41 +102,50 @@ var app = (function () {
 			pixels = imageData.data,
 			numPixels = imageData.width * imageData.height
 
-		for (var i = 0; i < numPixels; i++) {
-			var r = pixels[i * 4]
-			var g = pixels[i * 4 + 1]
-			var b = pixels[i * 4 + 2]
-
-			if (r == 127 // gris
-				|| (r == 0 && g == 0 && b == 0) // negro
-				|| (i <= 34200) // primera filas con logo de Aemet
-				|| (i >= 543400) // últimas filas con leyenda
-				|| (r == 255 && g == 0 && b == 255)) { // contorno rosado del mapa
-				pixels[i * 4] = 255 // rgb a blanco
-				pixels[i * 4 + 1] = 255 // rgb a blanco
-				pixels[i * 4 + 2] = 255 // rgb a blanco
-				pixels[i * 4 + 3] = 0 // opacidad 0 para convertirlo en transparente
+		function transparencia() {
+			for (var i = 0; i < numPixels; i++) {
+				var r = pixels[i * 4]; var g = pixels[i * 4 + 1];var b = pixels[i * 4 + 2];
+	
+				if (
+					(i <= 34200) // primera 45 filas (* 760 px) con logo de Aemet
+					|| (i >= 543400) // últimas 715 filas (* 760 px) con leyenda
+					|| (r == 255 && g == 0 && b == 255) // contorno rosado del mapa
+					|| (r == g && g == b) // grises
+					|| b == 0 // negro, amarillo
+					) {
+					// RGB a blanco
+					pixels[i * 4] = 255
+					pixels[i * 4 + 1] = 255
+					pixels[i * 4 + 2] = 255
+					// opacidad 0 para convertirlo en transparente
+					pixels[i * 4 + 3] = 0
+				}
 			}
 		}
 
+		transparencia()
 		context.putImageData(imageData, 0, 0)
 		var aemetPng = canvas.toDataURL('image/png')
 
-		// Marco donde se ubicará la imagen
-		latLngBounds = [
-			[46.4, -2.0], // límite NORTE
-			[41.0, -12.0], // límite OESTE
-			[32.9, 0.0], // límite SUR
-			[40.419623569820125, 5.859104861536971]] // límite ESTE
-
-		var imageOverlay = L.imageOverlay(aemetPng, latLngBounds, {
+		var imageOverlay = L.imageOverlay(aemetPng, marco, {
 			opacity: 1,
 			alt: 'Radar de la Aemet',
 			interactive: true,
 		})
 
-		aemet = L.layerGroup([imageOverlay])
-		loadMap(aemet)
+		aemet[index] = L.layerGroup([imageOverlay])
+
+		switch (aemet.length) {
+			case 1:
+				loadAemet(1, urlCanarias, marcoCanarias)
+				break;
+			case 2:
+				loadMap(aemet)
+				break;
+			default:
+				break;
+		}
+
 	}
 
 	return public
