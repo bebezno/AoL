@@ -44,7 +44,7 @@ function loadMap(aemet) {
 
 function loadAemet(index, url1, marco) {
 	// API Key obtenida en Opendata Aemet
-	var AK = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqdWFuam8ubC5zZW9hbmVAZ21haWwuY29tIiwianRpIjoiZDE3M2QzZGYtNGUxMC00NDdkLThmNTYtMTBiMTc5YjNlY2U5IiwiaXNzIjoiQUVNRVQiLCJpYXQiOjE2NDk0MjI5NTYsInVzZXJJZCI6ImQxNzNkM2RmLTRlMTAtNDQ3ZC04ZjU2LTEwYjE3OWIzZWNlOSIsInJvbGUiOiIifQ.vf8BhVgGFF82flCWcoZ0tyP8yRQ7uXnGNC9k1Yc6ng0"
+	var AK = ""
 	var URL2 = ""
 
 	// XMLHttpRequest
