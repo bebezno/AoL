@@ -1,9 +1,5 @@
 
-// let map = null
-let marco = null
 let aemet = []
-let aemetIberia = [null]
-let aemetCanarias = null
 let urlIberia = 'https://opendata.aemet.es/opendata/api/red/radar/nacional'
 let urlCanarias = 'https://opendata.aemet.es/opendata/api/red/radar/regional/ca'
 // Marco donde se ubicará la imagen 760 * 760 px, límites [[NORTE, OESTE], [SUR, OESTE], [SUR, ESTE], [NORTE, ESTE]]
